@@ -2,6 +2,7 @@
 // for information about these interfaces
 declare global {
 	namespace App {
+		interface Cookies {}
 		// interface Error {}
 		// interface Locals {}
 		// interface PageData {}
