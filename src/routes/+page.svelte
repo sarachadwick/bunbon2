@@ -13,7 +13,8 @@
     : 0;
   let cottontailBunnyCost: number = 5;
   let hollandLopBunnyCost: number = 20;
-  let interval;
+  let muffinInterval: number;
+  let cookieInterval: number;
   let shouldHideCottontail: boolean = muffins <= 3;
   let shouldHideHollandLopBunny: boolean = cookies <= 20;
   let shouldHideCookies: boolean = muffins <= 20;
@@ -58,6 +59,23 @@
     }
   };
 
+  let reset = () => {
+    muffins = 0;
+    cookies = 0;
+    cottontailBunNum = 0;
+    hollandLopBunNum = 0;
+    shouldHideCottontail = true;
+    shouldHideHollandLopBunny = true;
+    shouldHideCookies = true;
+    clearInterval(muffinInterval);
+    clearInterval(cookieInterval);
+
+    window.localStorage.setItem('muffins', muffins.toString());
+    window.localStorage.setItem('cookies', muffins.toString());
+    window.localStorage.setItem('cottontailBunNum', cottontailBunNum.toString());
+    window.localStorage.setItem('hollandLopBunNum', hollandLopBunNum.toString());
+  };
+
   $: {
     muffins;
     if (browser) {
@@ -68,14 +86,14 @@
   $: {
     cookies;
     if (browser) {
-      window.localStorage.setItem('cookies', muffins.toString());
+      window.localStorage.setItem('cookies', cookies.toString());
     }
   }
 
   $: {
     cottontailBunNum;
     if (cottontailBunNum != 0) {
-      interval = setInterval(muffinIncrement, 1000);
+      muffinInterval = setInterval(muffinIncrement, 1000);
     }
     if (browser) {
       window.localStorage.setItem('cottontailBunNum', cottontailBunNum.toString());
@@ -85,7 +103,7 @@
   $: {
     hollandLopBunNum;
     if (hollandLopBunNum != 0) {
-      interval = setInterval(cookieIncrement, 1000);
+      cookieInterval = setInterval(cookieIncrement, 1000);
     }
     if (browser) {
       window.localStorage.setItem('hollandLopBunNum', hollandLopBunNum.toString());
@@ -97,6 +115,9 @@
   <div style="display:flex; justify-content:space-evenly">
     <div id="muffin-stuffs" style="display: flex; align-items: center; flex-direction:column;">
       <p class="muffin-instructions">Click a muffin, make a muffin</p>
+      <p class="muffin-instructions" style="text-decoration-line:underline;" on:click={reset}>
+        reset
+      </p>
       <p>Muffins:</p>
       <p class="muffin-count">{muffins}</p>
       <span class:hidden={shouldHideCookies}>
