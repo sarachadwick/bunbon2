@@ -2,6 +2,7 @@
   import { browser } from '$app/environment';
   import muffinImg from '$lib/assets/simpleMuffin.png';
   import cottontailRabbitImg from '$lib/assets/simpleCottontail.png';
+  import BakedGood from './BakedGood.svelte';
 
   let muffins: number = browser ? parseInt(window.localStorage.getItem('muffins')) || 0 : 0;
   let cookies: number = browser ? parseInt(window.localStorage.getItem('cookies')) || 0 : 0;
@@ -115,9 +116,13 @@
   <div style="display:flex; justify-content:space-evenly">
     <div id="muffin-stuffs" style="display: flex; align-items: center; flex-direction:column;">
       <p class="muffin-instructions">Click a muffin, make a muffin</p>
-      <p class="muffin-instructions" style="text-decoration-line:underline;" on:click={reset}>
+      <a
+        href="#"
+        class="muffin-instructions"
+        on:click={reset}
+      >
         reset
-      </p>
+      </a>
       <p>Muffins:</p>
       <p class="muffin-count">{muffins}</p>
       <span class:hidden={shouldHideCookies}>
@@ -127,13 +132,17 @@
     </div>
     <div id="clickables">
       <div style="display: flex; justify-content: center;">
-        <button on:click={makeAMuffin}>
-          <img src={muffinImg} alt="the muffin-makin muffin" height="100" width="100" />
-        </button>
+        <BakedGood
+          makeABakedGood={makeAMuffin}
+          altText="the muffin makin muffin"
+          bakedGoodImg={muffinImg}
+        />
         <span class:hidden={shouldHideCookies}>
-          <button on:click={makeACookie}>
-            <img src={muffinImg} alt="clicking of the cookie" height="100" width="100" />
-          </button>
+          <BakedGood
+            makeABakedGood={makeACookie}
+            altText="clicking of the cookie"
+            bakedGoodImg={muffinImg}
+          />
         </span>
       </div>
       <div style="display: flex; justify-content: center; align">
