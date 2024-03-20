@@ -3,6 +3,7 @@
   import muffinImg from '$lib/assets/simpleMuffin.png';
   import cottontailRabbitImg from '$lib/assets/simpleCottontail.png';
   import BakedGood from './BakedGood.svelte';
+  import Baker from './Baker.svelte';
 
   let muffins: number = browser ? parseInt(window.localStorage.getItem('muffins')) || 0 : 0;
   let cookies: number = browser ? parseInt(window.localStorage.getItem('cookies')) || 0 : 0;
@@ -116,13 +117,7 @@
   <div style="display:flex; justify-content:space-evenly">
     <div id="muffin-stuffs" style="display: flex; align-items: center; flex-direction:column;">
       <p class="muffin-instructions">Click a muffin, make a muffin</p>
-      <a
-        href="#"
-        class="muffin-instructions"
-        on:click={reset}
-      >
-        reset
-      </a>
+      <a href="#" class="muffin-instructions" on:click={reset}> reset </a>
       <p>Muffins:</p>
       <p class="muffin-count">{muffins}</p>
       <span class:hidden={shouldHideCookies}>
@@ -146,30 +141,18 @@
         </span>
       </div>
       <div style="display: flex; justify-content: center; align">
-        <div
-          class="cottontail-rabbit"
-          class:hidden={shouldHideCottontail}
-          style="display: flex; justify-content: center; flex-direction:column;"
-        >
-          <button on:click={buyCottontailRabbit} style="display: flex; justify-content: center;">
-            <img src={cottontailRabbitImg} alt="buy a bunny" height="200" width="200" />
-          </button>
-          <p>
-            Convince a cottontail bunny to join you: {cottontailBunnyCost} muffins
-          </p>
-        </div>
-        <div
-          class="holland-lop-rabbit"
-          class:hidden={shouldHideHollandLopBunny}
-          style="display: flex; justify-content: center; flex-direction:column;"
-        >
-          <button on:click={buyHollandLop} style="display: flex; justify-content: center;">
-            <img src={cottontailRabbitImg} alt="buy a holland lop" height="200" width="200" />
-          </button>
-          <p>
-            Convince a cottontail bunny to join you: {hollandLopBunnyCost} cookies
-          </p>
-        </div>
+        <Baker
+          shouldHideBaker={shouldHideCottontail}
+          bunnyImg={cottontailRabbitImg}
+          buyBun={buyCottontailRabbit}
+          buyString={'Convince a cottontail bunny to join you: ' + cottontailBunnyCost + ' muffins'}
+        />
+        <Baker
+          shouldHideBaker={shouldHideHollandLopBunny}
+          bunnyImg={cottontailRabbitImg}
+          buyBun={buyHollandLop}
+          buyString={'Convince a holland lop to join you: ' + hollandLopBunnyCost + ' cookies'}
+        />
       </div>
     </div>
   </div>
