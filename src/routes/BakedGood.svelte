@@ -1,7 +1,11 @@
 <script lang="ts">
-  export let makeABakedGood: () => void;
   export let bakedGoodImg: string;
   export let altText: string;
+  export let bakedGood: number;
+
+  let makeABakedGood = () => {
+    bakedGood += 1;
+  };
 </script>
 
 <button on:click={makeABakedGood}>
