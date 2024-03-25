@@ -4,6 +4,7 @@ https://sarachadwick.github.io/bunbon2/
 
 To do:
 
+- [ ] Fix reset
 - [ ] Tests
 - [ ] Banner image
 - [ ] New color styles

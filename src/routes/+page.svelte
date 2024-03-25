@@ -15,6 +15,7 @@
   let shouldHideCottontail: boolean = muffins <= 3;
   let shouldHideHollandLopBunny: boolean = cookies <= 20;
   let shouldHideCookies: boolean = muffins <= 20;
+  let shouldHideMarket: boolean = cookies <= 100;
 
   let reset = () => {
     muffins = 0;
@@ -104,6 +105,12 @@
           bunNum={hollandLopBunNum}
           bakerName={'hollandLopBunNum'}
         />
+      </div>
+    </div>
+    <div id="market" class:hidden={shouldHideHollandLopBunny}>
+      <h1 class:hidden={!shouldHideMarket}>The market is closed!</h1>
+      <div class:hidden={shouldHideMarket}>
+        <h1>Welcome to the market!</h1>
       </div>
     </div>
   </div>
